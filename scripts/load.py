@@ -80,4 +80,4 @@ def load_stock_data(filepath):
     return engine
 
 engine = load_stock_data('../data/transformed_stock_data.csv')
-print("\nETL Pipeline Complete! Data is now in SQL Server!")
+print("\nETL Pipeline Complete! Data is now in SQL Server!") 

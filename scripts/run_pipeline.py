@@ -8,4 +8,4 @@ for script in scripts:
     print(f"\nRunning {script}...")
     subprocess.run(['python', script], check=True)
 
-print("\nPipeline Complete! Database and dashboard updated.")
+print("\nPipeline Complete! Database and dashboard updated.")  
