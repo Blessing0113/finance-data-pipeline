@@ -22,7 +22,7 @@ def transform_stock_data(filepath):
         volume_col = f'Volume_{stock}'
         
         temp_df = pd.DataFrame()
-        temp_df['date'] = df.index
+        temp_df['date'] = pd.to_datetime(df.index)
         temp_df['stock'] = stock
         temp_df['close_price'] = df[close_col].values
         temp_df['volume'] = df[volume_col].values

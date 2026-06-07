@@ -1,4 +1,5 @@
 import pandas as pd
+from sqlalchemy import Date
 from sqlalchemy import create_engine, text
 
 
@@ -34,14 +35,16 @@ def load_stock_data(filepath):
     print("Connecting to SQL Server...")
     engine = create_engine(connection_string)
     
+    df['date'] = pd.to_datetime(df['date'])
 
     df.to_sql(
-        name='stock_prices',
-        con=engine,
-        if_exists='replace',
-        index=False,
-        schema='dbo'
-    )
+    name='stock_prices',
+    con=engine,
+    if_exists='replace',
+    index=False,
+    schema='dbo',
+    dtype={'date': Date()}  
+        )
     
     print(f"Data loaded successfully! {len(df)} rows inserted into stock_prices table")
     
@@ -49,7 +52,7 @@ def load_stock_data(filepath):
     print("\nVerifying data in SQL Server...")
     
     with engine.connect() as conn:
-        # Count rows
+        
         result = conn.execute(text("SELECT COUNT(*) as total_rows FROM dbo.stock_prices"))
         print(f"Total rows in database: {result.fetchone()[0]}")
         
